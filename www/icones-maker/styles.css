@@ -1,0 +1,101 @@
+body {
+  background-color: hsl(250, 40%, 90%);
+  background-image: linear-gradient(45deg, rgba(0, 0, 0, .05) 25%, transparent 25%, transparent 75%, rgba(0, 0, 0, .05) 75%), linear-gradient(45deg, rgba(0, 0, 0, .05) 25%, transparent 25%, transparent 75%, rgba(0, 0, 0, .05) 75%);
+  background-size: 64px 64px;
+  background-position: 0 0, 32px 32px;
+  --size: 512px;
+  margin: 8px;
+}
+
+h2 {
+  color: white;
+  font-family: system-ui;
+  background-color: rgba(0, 0, 0, .5);
+  padding: 2px 5px;
+}
+
+.conteneur {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: start;
+}
+
+.conteneur>h2 {
+  flex-basis: 100%;
+}
+
+.icone {
+  width: var(--size);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 5px;
+  position: relative;
+}
+
+.svg {
+  width: 100%;
+  height: 0;
+  padding-top: 100%;
+}
+
+.round {
+  border-radius: 50%;
+}
+
+.icone:hover {
+  box-shadow: 0 0 0 1px red;
+}
+
+.icone:hover::after {
+  content: '';
+  width: 80%;
+  height: 80%;
+  border-radius: 50%;
+  border: 1px dashed rgba(255, 0, 0, 1);
+  position: absolute;
+  top: 10%;
+  left: 10%;
+  box-sizing: border-box;
+}
+
+canvas {
+  margin: 5px;
+}
+
+.mosaique {
+  display: flex;
+  width: 1200px;
+  height: 628px;
+  background-color: hsl(300, 30%, 15%);
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: flex-end;
+  overflow: hidden;
+  background-image: url('../mon-portfolio/projets/solaire/preview-pc.png');
+  background-size: cover;
+  background-position: center calc(-0.4 * 628px);
+  position: relative;
+}
+
+.mosaicone {
+  margin: 0px;
+  --size: 300;
+  width: calc(var(--size) * 1px);
+  height: calc(var(--size) * 1px);
+  filter: drop-shadow(0 -1px 0 white);
+}
+
+.fleche {
+  width: 0;
+  height: 0;
+  position: absolute;
+  bottom: 300px;
+  left: 750px;
+  transform: translateX(-50%);
+  border: 25px solid transparent;
+  border-bottom: 25px solid hsl(344, 29%, 10%);
+  filter: drop-shadow(0 -1px 0 white);
+}

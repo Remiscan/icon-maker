@@ -33,7 +33,7 @@ require_once $commonDir.'/php/version.php';
   <div class="conteneur">
 
 <!-- COLORI -->
-<div class="icone"><div class="svg" data-bgcolor="#4AE5B3" style="background-image: url('../colori/icons/icon.svg');"></div></div>
+<div class="icone"><div class="svg" data-bgcolor="#4AE5B3" style="background-image: url('../colori/demo/icons/icon.svg');"></div></div>
 
 <!-- CSSWITCH -->
 <div class="icone"><div class="svg" data-bgcolor="#FFFFFF" style="background-image: url('../csswitch/icons/icon.svg');"></div></div>
@@ -42,7 +42,7 @@ require_once $commonDir.'/php/version.php';
 <div class="icone"><div class="svg" data-bgcolor="#201115" data-app="true" style="background-image: url('../solaire/icons/icon.svg');"></div></div>
 
 <!-- RÉMIDEX -->
-<div class="icone"><div class="svg" data-bgcolor="#4151B2" data-app="true" style="background-image: url('../remidex/icons/icon.svg');"></div></div>
+<div class="icone"><div class="svg" data-bgcolor="#4151B2" data-app="true" style="background-image: url('../shinydex/images/app-icons/icon.svg');"></div></div>
 
 <!-- REMISCAN.FR -->
 <div class="icone"><div class="svg" data-bgcolor="#311931" style="background-image: url('../mon-portfolio/icons/icon.svg');"></div></div>
@@ -54,10 +54,10 @@ require_once $commonDir.'/php/version.php';
   <h2>Mosaïque d'aperçu de mes projets</h2>
 
   <div class="mosaique">
-    <div class="mosaicone"><div class="svg" style="background-image: url('../colori/icons/icon.svg');"></div></div>
+    <div class="mosaicone"><div class="svg" style="background-image: url('../colori/demo/icons/icon.svg');"></div></div>
     <div class="mosaicone"><div class="svg" style="background-image: url('../csswitch/icons/icon.svg');"></div></div>
     <div class="mosaicone"><div class="svg" style="background-image: url('../solaire/icons/icon.svg');"></div></div>
-    <div class="mosaicone"><div class="svg" style="background-image: url('../remidex/icons/icon.svg');"></div></div>
+    <div class="mosaicone"><div class="svg" style="background-image: url('../remidex/images/app-icons/icon.svg');"></div></div>
     <div class="fleche"></div>
   </div>
 

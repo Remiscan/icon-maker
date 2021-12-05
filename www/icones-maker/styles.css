@@ -20,6 +20,17 @@ h2 {
   align-items: start;
 }
 
+.icone.maskable {
+  display: none;
+}
+
+.conteneur.maskable .icone.maskable {
+  display: block;
+}
+.conteneur.maskable .icone:not(.maskable) {
+  display: none;
+}
+
 .conteneur>h2 {
   flex-basis: 100%;
 }
@@ -50,14 +61,21 @@ h2 {
 
 .icone:hover::after {
   content: '';
-  width: 80%;
-  height: 80%;
+  width: 100%;
+  height: 100%;
   border-radius: 50%;
   border: 1px dashed rgba(255, 0, 0, 1);
   position: absolute;
+  top: 0%;
+  left: 0%;
+  box-sizing: border-box;
+}
+
+.icone.maskable:hover::after {
+  width: 80%;
+  height: 80%;
   top: 10%;
   left: 10%;
-  box-sizing: border-box;
 }
 
 canvas {

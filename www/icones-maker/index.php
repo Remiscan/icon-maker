@@ -25,27 +25,45 @@ require_once $commonDir.'/php/version.php';
      | 
     <label for="circ">Icônes rondes</label> 
     <input id="circ" type="checkbox" oninput="console.log(this.checked); Array.from(document.getElementsByClassName('svg')).forEach(e => { if (this.checked) e.classList.add('round'); else e.classList.remove('round'); })">
-     | 
-    <label for="maska">Maskable</label> 
-    <input id="maska" type="checkbox" oninput="Array.from(document.getElementsByClassName('svg')).forEach(e => { if (this.checked) e.style.backgroundImage = e.style.backgroundImage.replace('.svg', '-maskable.svg'); else e.style.backgroundImage = e.style.backgroundImage.replace('-maskable.svg', '.svg'); })">
   </h2>
 
   <div class="conteneur">
 
 <!-- COLORI -->
-<div class="icone"><div class="svg" data-bgcolor="#4AE5B3" style="background-image: url('../colori/demo/icons/icon.svg');"></div></div>
+<div class="icone" data-app="colori"><div class="svg" data-bgcolor="#4AE5B3" style="background-image: url('../colori/demo/icons/icon.svg');"></div></div>
 
 <!-- CSSWITCH -->
-<div class="icone"><div class="svg" data-bgcolor="#FFFFFF" style="background-image: url('../csswitch/icons/icon.svg');"></div></div>
+<div class="icone" data-app="csswitch"><div class="svg" data-bgcolor="#FFFFFF" style="background-image: url('../csswitch/icons/icon.svg');"></div></div>
 
 <!-- SOLAIRE -->
-<div class="icone"><div class="svg" data-bgcolor="#201115" data-app="true" style="background-image: url('../solaire/icons/icon.svg');"></div></div>
+<div class="icone" data-app="solaire"><div class="svg" data-bgcolor="#201115" data-app="true" style="background-image: url('../solaire/icons/icon.svg');"></div></div>
 
 <!-- RÉMIDEX -->
-<div class="icone"><div class="svg" data-bgcolor="#4151B2" data-app="true" style="background-image: url('../shinydex/images/app-icons/icon.svg');"></div></div>
+<div class="icone" data-app="shinydex"><div class="svg" data-bgcolor="#4151B2" data-app="true" style="background-image: url('../shinydex/images/app-icons/icon.svg');"></div></div>
 
 <!-- REMISCAN.FR -->
-<div class="icone"><div class="svg" data-bgcolor="#311931" style="background-image: url('../mon-portfolio/icons/icon.svg');"></div></div>
+<div class="icone" data-app="mon-portfolio"><div class="svg" data-bgcolor="#311931" style="background-image: url('../mon-portfolio/icons/icon.svg');"></div></div>
+
+  </div>
+
+  <h2>Maskable</h2>
+
+  <div class="conteneur maskable">
+
+<!-- COLORI -->
+<div class="icone maskable" data-app="colori"><div class="svg" data-bgcolor="#4AE5B3" style="background-image: url('../colori/demo/icons/icon-maskable.svg');"></div></div>
+
+<!-- CSSWITCH -->
+<div class="icone maskable" data-app="csswitch"><div class="svg" data-bgcolor="#FFFFFF" style="background-image: url('../csswitch/icons/icon-maskable.svg');"></div></div>
+
+<!-- SOLAIRE -->
+<div class="icone maskable" data-app="solaire"><div class="svg" data-bgcolor="#201115" data-app="true" style="background-image: url('../solaire/icons/icon-maskable.svg');"></div></div>
+
+<!-- RÉMIDEX -->
+<div class="icone maskable" data-app="shinydex"><div class="svg" data-bgcolor="#4151B2" data-app="true" style="background-image: url('../shinydex/images/app-icons/icon-maskable.svg');"></div></div>
+
+<!-- REMISCAN.FR -->
+<div class="icone maskable" data-app="mon-portfolio"><div class="svg" data-bgcolor="#311931" style="background-image: url('../mon-portfolio/icons/icon-maskable.svg');"></div></div>
 
   </div>
 
@@ -69,53 +87,36 @@ require_once $commonDir.'/php/version.php';
     
     // Détecte le clic sur chaque icône pour créer les icônes
     Array.from(document.querySelectorAll('.icone')).forEach((e, k) => {
-      e.addEventListener('click', event => {
-        const svg = event.currentTarget.querySelector('.svg');
+      e.addEventListener('click', async event => {
+        const app = event.currentTarget.dataset.app;
+        const svg = document.querySelector(`.icone[data-app="${app}"]:not(.maskable) > .svg`);
+        const svgMaskable = document.querySelector(`.icone[data-app="${app}"].maskable > .svg`);
         const conteneur = document.querySelectorAll('.conteneur')[k];
-        const maskable = document.querySelector('#maska').checked;
         document.querySelector('.liste-canvas').innerHTML = '<h2>Icônes générées</h2>';
 
         //let ask = window.confirm('Télécharger les icônes ?');
         let ask = true;
         if (!ask) return;
 
-        // Si on génère des icônes non maskables
-        if (!maskable) {
-          // Icône ronde avec ombre, 192px pour Android
-          drawIcon(svg, 192, true, svg.dataset.bgcolor, false)
-          .then(canvas => prepareDl(canvas, 'icon-192.png'));
+        // Icône ronde avec ombre, 192px pour Android
+        await drawIcon(svg, 192, true, svg.dataset.bgcolor, true)
+        .then(canvas => prepareDl(canvas, 'icon-192.png'));
 
-          // Icône ronde avec ombre, 192px pour Android
-          drawIcon(svg, 192, true, svg.dataset.bgcolor, true)
-          .then(canvas => prepareDl(canvas, 'icon-192.png'));
+        // Icône ronde avec ombre, 512px pour Android (splash screen)
+        await drawIcon(svg, 512, true, svg.dataset.bgcolor, true)
+        .then(canvas => prepareDl(canvas, 'icon-512.png'));
 
-          // Icône carrée, 180px pour iOS
-          drawIcon(svg, 180, false, svg.dataset.bgcolor, false)
-          .then(canvas => prepareDl(canvas, 'apple-touch-icon.png'));
+        // Icône carrée, 180px pour iOS
+        await drawIcon(svgMaskable, 180, false, svg.dataset.bgcolor, false)
+        .then(canvas => prepareDl(canvas, 'apple-touch-icon.png'));
 
-          // Icône ronde avec ombre, 512px pour Android (splash screen)
-          drawIcon(svg, 512, true, svg.dataset.bgcolor, true)
-          .then(canvas => prepareDl(canvas, 'icon-512.png'));
+        // Icône carrée, 192px pour Android (splash screen)
+        await drawIcon(svgMaskable, 192, false, svg.dataset.bgcolor, false)
+        .then(canvas => prepareDl(canvas, 'icon-192-maskable.png'));
 
-          // Icône carrée, 512px pour Android (splash screen)
-          drawIcon(svg, 512, false, svg.dataset.bgcolor, false)
-          .then(canvas => prepareDl(canvas, 'icon-512.png'));
-        }
-
-        // Si on génère des icônes maskables
-        else {
-          // Icône carrée, 180px pour iOS
-          drawIcon(svg, 180, false, svg.dataset.bgcolor, false)
-          .then(canvas => prepareDl(canvas, 'apple-touch-icon.png'));
-
-          // Icône carrée, 192px pour Android (maskable)
-          drawIcon(svg, 192, false, svg.dataset.bgcolor, false)
-          .then(canvas => prepareDl(canvas, 'icon-192-maskable.png'));
-
-          // Icône carrée, 512px pour Android (maskable)
-          drawIcon(svg, 512, false, svg.dataset.bgcolor, false)
-          .then(canvas => prepareDl(canvas, 'icon-512-maskable.png'));
-        }
+        // Icône carrée, 512px pour Android (splash screen)
+        await drawIcon(svgMaskable, 512, false, svg.dataset.bgcolor, false)
+        .then(canvas => prepareDl(canvas, 'icon-512-maskable.png'));
       });
     });
 

@@ -20,46 +20,38 @@ h2 {
   align-items: start;
 }
 
-.icone.maskable {
-  display: none;
-}
-
-.conteneur.maskable .icone.maskable {
-  display: block;
-}
-.conteneur.maskable .icone:not(.maskable) {
-  display: none;
-}
-
 .conteneur>h2 {
   flex-basis: 100%;
 }
 
-.icone {
+.icone img {
   width: var(--size);
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 5px;
-  position: relative;
+  height: var(--size);
 }
 
-.svg {
-  width: 100%;
-  height: 0;
-  padding-top: 100%;
-}
-
-.round {
+body[data-round="true"] .icone img {
   border-radius: 50%;
 }
 
-.icone:hover {
+body[data-round="true"] .maskable img {
+  clip-path: circle(40% at center center);
+}
+
+.app-name {
+  font-weight: bold;
+  text-align: right;
+}
+
+.icone > div {
+  position: relative;
+  display: flex;
+}
+
+.icone > div:hover {
   box-shadow: 0 0 0 1px red;
 }
 
-.icone:hover::after {
+.icone > div:hover::after {
   content: '';
   width: 100%;
   height: 100%;
@@ -71,7 +63,7 @@ h2 {
   box-sizing: border-box;
 }
 
-.icone.maskable:hover::after {
+.maskable > div:hover::after {
   width: 80%;
   height: 80%;
   top: 10%;
@@ -116,4 +108,11 @@ canvas {
   border: 25px solid transparent;
   border-bottom: 25px solid hsl(344, 29%, 10%);
   filter: drop-shadow(0 -1px 0 white);
+}
+
+.canvases {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: -100%;
 }

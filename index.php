@@ -1,7 +1,4 @@
 <?php
-$commonDir = dirname(__DIR__, 1).'/_common';
-require_once $commonDir.'/php/version.php';
-
 $apps = [
   [
     'id' => 'colori',
@@ -35,20 +32,24 @@ $apps = [
     <meta name="viewport" content="initial-scale=1">
     <meta name="theme-color" content="hsl(250, 40%, 20%)">
 
+    <?php versionizeStart(); ?>
+
     <!-- Import map -->
     <script defer src="/_common/polyfills/es-module-shims.js"></script>
     <script type="importmap">
     {
       "imports": {
-        "draw-icon": "./modules/drawIcon--<?=version(__DIR__, 'modules/drawIcon.js')?>.js",
-        "zip-icons": "./modules/zipIcons--<?=version(__DIR__, 'modules/zipIcons.js')?>.js"
+        "draw-icon": "./modules/drawIcon.js",
+        "zip-icons": "./modules/zipIcons.js"
       }
     }
     </script>
     <script defer src="./ext/jszip.min.js"></script>
-    <script type="module" src="./modules/main--<?=version(__DIR__, 'modules/main.js')?>.js"></script>
+    <script type="module" src="./modules/main.js"></script>
 
-    <link href="styles--<?=version(__DIR__, 'styles.css')?>.css" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
+
+    <?php versionizeEnd(__DIR__); ?>
   </head>
 
   <body>

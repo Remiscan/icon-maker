@@ -121,10 +121,3 @@ canvas {
   border-bottom: 25px solid hsl(344, 29%, 10%);
   filter: drop-shadow(0 -1px 0 white);
 }
-
-.canvases {
-  display: block;
-  position: absolute;
-  top: 0;
-  left: -100%;
-}

@@ -1,7 +1,7 @@
 export async function zipIcons(files = []) {
   const zip = new JSZip();
   for (const file of files) {
-    zip.file(file.name, file.data.replace('data:image/png;base64,', ''), file.options);
+    zip.file(file.name, file.data, file.options);
   }
   const zipFile = zip.generateAsync({ type: 'blob' });
   return zipFile;

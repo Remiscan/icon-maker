@@ -94,8 +94,6 @@ $apps = [
       </tbody>
     </table>
 
-    <div class="canvases"></div>
-
     <!--<div class="conteneur liste-canvas"></div>
 
     <h2>Mosaïque d'aperçu de mes projets</h2>

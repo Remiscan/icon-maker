@@ -6,13 +6,9 @@ export async function makeIcon(
   bgcolor = '#000', 
   shadow = false
 ) {
-  const canvas = document.createElement('canvas');
-  canvas.width = size;
-  canvas.height = size;
-  canvas.style.setProperty('image-rendering', 'optimizeQuality', null);
-
+  const canvas = new OffscreenCanvas(size, size);
   const ctx = canvas.getContext("2d");
-  const img = new Image();  
+  const img = new Image();
 
   return new Promise(resolve => {
     img.addEventListener('load', () => {

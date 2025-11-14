@@ -19,33 +19,31 @@ for (const button of [...document.querySelectorAll('button[data-app]')]) {
     const svg = container.querySelector('.non-maskable img').src;
     const svgMaskable = container.querySelector('.maskable img').src;
     const color = event.currentTarget.dataset.color;
-    const hiddenCanvases = document.querySelector('.canvases');
 
-    const prepareIcon = canvas => {
-      hiddenCanvases.appendChild(canvas);
-      return canvas.toDataURL();
+    const prepareIcon = async canvas => {
+      return await canvas.convertToBlob();
     };
 
     const files = [
       {
         name: 'icon-192.png',
-        data: prepareIcon(await makeIcon(svg, 192, true, color, true)),
+        data: await prepareIcon(await makeIcon(svg, 192, true, color, true)),
         options: { base64: true }
       }, {
         name: 'icon-512.png',
-        data: prepareIcon(await makeIcon(svg, 512, true, color, true)),
+        data: await prepareIcon(await makeIcon(svg, 512, true, color, true)),
         options: { base64: true }
       }, {
         name: 'apple-touch-icon.png',
-        data: prepareIcon(await makeIcon(svgMaskable, 180, false, color, false)),
+        data: await prepareIcon(await makeIcon(svgMaskable, 180, false, color, false)),
         options: { base64: true }
       }, {
         name: 'icon-192-maskable.png',
-        data: prepareIcon(await makeIcon(svgMaskable, 192, false, color, false)),
+        data: await prepareIcon(await makeIcon(svgMaskable, 192, false, color, false)),
         options: { base64: true }
       }, {
         name: 'icon-512-maskable.png',
-        data: prepareIcon(await makeIcon(svgMaskable, 512, false, color, false)),
+        data: await prepareIcon(await makeIcon(svgMaskable, 512, false, color, false)),
         options: { base64: true }
       }, {
         name: 'manifest.webmanifest',
